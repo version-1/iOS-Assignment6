@@ -25,8 +25,18 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
         [Todo(id: 3, title: "page", priority: 1, status: 0)]
     ]
     
+    var editingButton : UIBarButtonItem?
+    var doneButton : UIBarButtonItem?
+    var deleteButton: UIBarButtonItem?
+    var addButton: UIBarButtonItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        editingButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onEditing))
+        doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onEditingDone))
+        deleteButton = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(onTapDelete))
+        addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(onTapNew))
         
         setHeader()
         setBody()
@@ -37,11 +47,14 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     func setHeader() {
-        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onTapLeftItem))
-        self.navigationItem.leftBarButtonItem = editButton
-        let deleteButton = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(onTapDelete))
-        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(onTapNew))
-        self.navigationItem.rightBarButtonItems = [addButton, deleteButton]
+        self.navigationItem.leftBarButtonItem = editingButton
+        self.navigationItem.rightBarButtonItems = [addButton!]
+    }
+    
+    func setHeaderForEditing() {
+        self.navigationItem.leftBarButtonItem = doneButton
+        self.navigationItem.rightBarButtonItems = [deleteButton!]
+        
     }
     
     func setBody() {
@@ -86,8 +99,14 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
         label.frame = view.bounds
     }
     
-    @objc func onTapLeftItem() {
+    @objc func onEditing() {
         tableView.setEditing(true, animated: true)
+        setHeaderForEditing()
+    }
+    
+    @objc func onEditingDone() {
+        tableView.setEditing(false, animated: true)
+        setHeader()
     }
     
     @objc func onTapDelete() {
