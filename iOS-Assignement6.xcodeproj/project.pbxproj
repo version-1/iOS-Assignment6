@@ -15,6 +15,7 @@
 		84D300C9247498D40024EB54 /* iOS_Assignement6Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D300C8247498D40024EB54 /* iOS_Assignement6Tests.swift */; };
 		84D300D4247498D40024EB54 /* iOS_Assignement6UITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D300D3247498D40024EB54 /* iOS_Assignement6UITests.swift */; };
 		84D300E22476435E0024EB54 /* NewTodoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D300E12476435D0024EB54 /* NewTodoController.swift */; };
+		84D300E424764FC50024EB54 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84D300E324764FC50024EB54 /* Todo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		84D300D3247498D40024EB54 /* iOS_Assignement6UITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOS_Assignement6UITests.swift; sourceTree = "<group>"; };
 		84D300D5247498D40024EB54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		84D300E12476435D0024EB54 /* NewTodoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTodoController.swift; sourceTree = "<group>"; };
+		84D300E324764FC50024EB54 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 				84D300B1247498D00024EB54 /* AppDelegate.swift */,
 				84D300E12476435D0024EB54 /* NewTodoController.swift */,
 				84D300B3247498D00024EB54 /* SceneDelegate.swift */,
+				84D300E324764FC50024EB54 /* Todo.swift */,
 				84D300B5247498D00024EB54 /* ViewController.swift */,
 				84D300BA247498D40024EB54 /* Assets.xcassets */,
 				84D300BC247498D40024EB54 /* LaunchScreen.storyboard */,
@@ -262,6 +265,7 @@
 				84D300B2247498D00024EB54 /* AppDelegate.swift in Sources */,
 				84D300E22476435E0024EB54 /* NewTodoController.swift in Sources */,
 				84D300B4247498D00024EB54 /* SceneDelegate.swift in Sources */,
+				84D300E424764FC50024EB54 /* Todo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

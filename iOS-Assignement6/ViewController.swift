@@ -11,6 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     let label = UILabel()
+    var list: [Todo] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
