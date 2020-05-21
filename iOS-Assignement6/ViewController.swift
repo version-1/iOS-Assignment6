@@ -93,6 +93,11 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
         return cell
     }
     
+    override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
+        let todoController = TodoController()
+        todoController.todo = list[indexPath.section][indexPath.row]
+        navigationController?.pushViewController(todoController, animated: true)
+    }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -114,7 +119,7 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     @objc func onTapNew() {
-        let newTodo = NewTodoController()
+        let newTodo = TodoController()
         navigationController?.pushViewController(newTodo, animated: true)
     }
 }

@@ -8,19 +8,24 @@
 
 import UIKit
 
-class NewTodoController: UIViewController {
+class TodoController: UIViewController {
     
     var todo: Todo?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.todo = Todo()
         setHeader()
         setBody()
     }
     
     func setHeader() {
-        navigationItem.title = "Add Todo Item"
+        if self.todo != nil {
+          navigationItem.title = "Edit Todo Item"
+        } else {
+          navigationItem.title = "Add Todo Item"
+          self.todo = Todo()
+        }
+        
         let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onTapCancel))
         navigationItem.leftBarButtonItem = cancelButton
         let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onTapDone))
@@ -32,6 +37,7 @@ class NewTodoController: UIViewController {
         
         let textField = UITextField()
         textField.frame = CGRect(x: 0, y: 150, width: UIScreen.main.bounds.size.width, height: 56)
+        textField.text = todo!.title
         textField.placeholder = "Input Title"
         textField.backgroundColor = .white
         textField.keyboardType = .default
