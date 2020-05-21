@@ -22,6 +22,7 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
         [Todo(id: 2, title: "fuga", priority: 1, status: 0)],
         [Todo(id: 3, title: "page", priority: 1, status: 0)]
     ]
+    var selected :[IndexPath] = []
     
     var editingButton : UIBarButtonItem?
     var doneButton : UIBarButtonItem?
@@ -74,6 +75,20 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selected.append(indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        var newSelected = [] as [IndexPath]
+        for path in selected {
+            if path.section != indexPath.section || path.row != indexPath.section {
+                newSelected.append(path)
+            }
+        }
+        selected.append(indexPath)
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.list[section].count
     }
@@ -117,7 +132,12 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     @objc func onTapDelete() {
-        
+        for select in selected {
+            list[select.section].remove(at: select.row)
+        }
+        tableView.reloadData()
+        tableView.setEditing(false, animated: true)
+        setHeader()
     }
     
     @objc func onTapNew() {
