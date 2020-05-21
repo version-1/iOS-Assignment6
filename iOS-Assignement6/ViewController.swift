@@ -8,10 +8,8 @@
 
 import UIKit
 
-class ViewController: UITableViewController, UITableViewDragDelegate , UITableViewDropDelegate{
-    
-    
-    
+class ViewController: UITableViewController, UITableViewDragDelegate , UITableViewDropDelegate {
+        
     struct PropertyKeys {
         static let todoCell = "TodoCell"
     }
@@ -46,6 +44,12 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
         tableView.dropDelegate = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        tableView.reloadData()
+    }
+    
     func setHeader() {
         self.navigationItem.leftBarButtonItem = editingButton
         self.navigationItem.rightBarButtonItems = [addButton!]
@@ -75,11 +79,11 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-      return self.list.count
+        return self.list.count
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-       return headers[section]
+        return headers[section]
     }
     
     // create a cell for each table view row
@@ -94,9 +98,7 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let todoController = TodoController()
-        todoController.todo = list[indexPath.section][indexPath.row]
-        navigationController?.pushViewController(todoController, animated: true)
+        toTodoView(indexPath: indexPath)
     }
     
     override func viewDidLayoutSubviews() {
@@ -119,8 +121,17 @@ class ViewController: UITableViewController, UITableViewDragDelegate , UITableVi
     }
     
     @objc func onTapNew() {
-        let newTodo = TodoController()
-        navigationController?.pushViewController(newTodo, animated: true)
+        toTodoView(indexPath: nil)
+    }
+    
+    private func toTodoView(indexPath: IndexPath?) {
+        let todoController = TodoController()
+        todoController.list = list
+        if indexPath != nil {
+            todoController.todo = list[indexPath!.section][indexPath!.row]
+            todoController.indexPath = indexPath
+        }
+        navigationController?.pushViewController(todoController, animated: true)
     }
 }
 

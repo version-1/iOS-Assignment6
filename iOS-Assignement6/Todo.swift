@@ -11,6 +11,6 @@ import Foundation
 struct Todo {
     var id: Int?
     var title: String = ""
-    var priority: Int = 0
+    var priority: Int = 1
     var status: Int = 0
 }

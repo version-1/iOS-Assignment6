@@ -11,7 +11,17 @@ import UIKit
 class TodoController: UIViewController {
     
     var todo: Todo?
-
+    var list: [[Todo]]?
+    var indexPath: IndexPath?
+    var isEditForm = false
+    
+    var cancelButton: UIBarButtonItem?
+    var doneButton: UIBarButtonItem?
+    
+    struct PropertyKeys {
+        static let high = "TodoCell"
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setHeader()
@@ -20,16 +30,17 @@ class TodoController: UIViewController {
     
     func setHeader() {
         if self.todo != nil {
+          isEditForm = true
           navigationItem.title = "Edit Todo Item"
         } else {
           navigationItem.title = "Add Todo Item"
           self.todo = Todo()
         }
         
-        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onTapCancel))
+        cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(onTapCancel))
+        doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onTapDone))
         navigationItem.leftBarButtonItem = cancelButton
-        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(onTapDone))
-        navigationItem.rightBarButtonItems = [doneButton]
+        navigationItem.rightBarButtonItems = [doneButton!]
     }
     
     func setBody() {
@@ -55,6 +66,13 @@ class TodoController: UIViewController {
     }
     
     @objc func onTapDone() {
+        if (isEditForm) {
+            list![indexPath!.section][indexPath!.row] = todo!
+        } else {
+            list![1].append(todo!)
+        }
+        let controller = navigationController!.viewControllers[0] as! ViewController
+        controller.list = list!
         navigationController?.popViewController(animated: true)
     }
 
