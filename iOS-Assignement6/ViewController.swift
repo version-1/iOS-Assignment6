@@ -9,20 +9,37 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     let label = UILabel()
-
-      override func viewDidLoad() {
-          super.viewDidLoad()
-          view.backgroundColor = UIColor.white
-          label.text = "Hello World"
-          label.textAlignment = .center
-          view.addSubview(label)
-      }
-
-      override func viewDidLayoutSubviews() {
-          super.viewDidLayoutSubviews()
-          label.frame = view.bounds
-      }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = UIColor.white
+        label.text = "Hello World"
+        label.textAlignment = .center
+        view.addSubview(label)
+        let editButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(onTapLeftItem))
+        self.navigationItem.leftBarButtonItem = editButton
+        let deleteButton = UIBarButtonItem(title: "Delete", style: .plain, target: self, action: #selector(onTapDelete))
+        let addButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(onTapNew))
+        self.navigationItem.rightBarButtonItems = [addButton, deleteButton]
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        label.frame = view.bounds
+    }
+    
+    @objc func onTapLeftItem() {
+        
+    }
+    
+    @objc func onTapDelete() {
+        
+    }
+    
+    @objc func onTapNew() {
+        
+    }
 }
 
